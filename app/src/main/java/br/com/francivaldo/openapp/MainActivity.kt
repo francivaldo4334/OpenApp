@@ -56,10 +56,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        listApps = packageManager.getInstalledPackages(0).map { it.toUiAppInfor() }.toMutableList()
+        listApps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA).map { it.toUiAppInfor() }.toMutableList()
 
     }
-    fun PackageInfo.toUiAppInfor():UiAppInfor = UiAppInfor(this.packageName,{
+    fun ApplicationInfo.toUiAppInfor():UiAppInfor = UiAppInfor(this.packageName,{
         try {
             this@MainActivity.startActivity(packageManager.getLaunchIntentForPackage(this.packageName))
         }catch (e:Exception){
